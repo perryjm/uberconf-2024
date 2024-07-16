@@ -1,5 +1,7 @@
 package org.example.com.nfjs;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,7 +11,8 @@ class BlogPostServiceTest {
 
   @Test
   void testGetBlogPosts() {
-    System.out.println(fixture.getBlogPosts());
+    List<BlogPostService.Post> list = fixture.getBlogPosts();
+    System.out.println(list);
   }
 
   @Test
