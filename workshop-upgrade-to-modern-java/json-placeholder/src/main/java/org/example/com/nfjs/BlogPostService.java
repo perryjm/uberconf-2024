@@ -23,4 +23,6 @@ public class BlogPostService {
       throw new RuntimeException(e);
     }
   }
+
+  record Post(int userId, int id, String title, String body) {}
 }
