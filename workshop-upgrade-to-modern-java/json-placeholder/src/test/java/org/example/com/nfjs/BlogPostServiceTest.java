@@ -84,7 +84,10 @@ class BlogPostServiceTest {
   @EnumSource(Month.class)
   void testMonths(Month month) {
     int days = switch (month) {
-      case FEBRUARY -> Year.isLeap(Year.now().getValue()) ? 29 : 28;
+      case FEBRUARY -> {
+        System.out.println("Checking February" + Year.now().getValue());
+        yield Year.isLeap(Year.now().getValue()) ? 29 : 28;
+      }
       case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
       default -> 31;
     };
