@@ -77,6 +77,15 @@ public class BlogPostService {
     String title,
     String body
   ) {
+    // compact constructor, used primarily for validating inputs
+    public Post {
+      if (title == null || title.isBlank()) {
+        throw new IllegalArgumentException("Title cannot be null or blank");
+      }
+      if (body == null || body.isBlank()) {
+        throw new IllegalArgumentException("Body cannot be null or blank");
+      }
+    }
   }
 
   public record PostList(

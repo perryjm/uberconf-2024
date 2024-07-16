@@ -110,10 +110,19 @@ class BlogPostServiceTest {
         "userId": %d,
         "id": %d,
         "title": %s,
-        "body": %s
+        "body": %s \s
       }
       """.formatted(1, 0, "title", "body"); // for text blocks, the closing """ shows how much white space indentatino to include in your text block.
     System.out.println(fixture.addBlogPost(anotherJson));
+  }
+
+  @Test
+  void testPostRecordCompactConstructor() {
+    BlogPostService.Post post = new BlogPostService.Post(1, 0, "title", "body");
+    assertEquals(1, post.userId());
+
+    String message = assertThrows(Exception.class, () -> new BlogPostService.Post(1, 0, null, "body")).getMessage();
+    assertEquals("Title cannot be null or blank", message);
   }
 
 }
