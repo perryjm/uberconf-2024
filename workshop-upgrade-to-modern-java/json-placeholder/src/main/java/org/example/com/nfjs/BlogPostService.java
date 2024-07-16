@@ -14,7 +14,7 @@ public class BlogPostService {
   private final Gson gson = new Gson();
 
   public List<Post> getBlogPosts() {
-    try (HttpClient client = HttpClient.newHttpClient()) {
+    try (var client = HttpClient.newHttpClient()) {
       HttpRequest request = HttpRequest.newBuilder()
           .uri(URI.create(BASE_URL + "/posts"))
           .build();
@@ -27,7 +27,7 @@ public class BlogPostService {
   }
 
   public Post getBlogPost(int id) {
-    try (HttpClient client = HttpClient.newHttpClient()) {
+    try (var client = HttpClient.newHttpClient()) {
       HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("%s/posts/%d".formatted(BASE_URL, id)))
         .build();
@@ -40,7 +40,7 @@ public class BlogPostService {
   }
 
   public Post addBlogPost(Post post) {
-    try (HttpClient client = HttpClient.newHttpClient()) {
+    try (var client = HttpClient.newHttpClient()) {
       HttpRequest request = HttpRequest.newBuilder()
         .header("Content-Type", "application/json")
         .header("Accept", "application/json")
