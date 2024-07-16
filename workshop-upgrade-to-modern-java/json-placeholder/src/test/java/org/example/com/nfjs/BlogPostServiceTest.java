@@ -14,6 +14,8 @@ class BlogPostServiceTest {
 
   @Test
   void getBlogPost() {
-    System.out.println(fixture.getBlogPost(1));
+    BlogPostService.Post blogPost = fixture.getBlogPost(1);
+    System.out.println(blogPost);
+    assertEquals(1, blogPost.userId());
   }
 }
