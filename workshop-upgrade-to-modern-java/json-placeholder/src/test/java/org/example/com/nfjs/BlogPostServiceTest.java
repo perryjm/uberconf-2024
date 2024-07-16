@@ -12,4 +12,8 @@ class BlogPostServiceTest {
     System.out.println(fixture.getBlogPosts());
   }
 
+  @Test
+  void getBlogPost() {
+    System.out.println(fixture.getBlogPost(1));
+  }
 }

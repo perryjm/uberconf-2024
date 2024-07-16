@@ -24,5 +24,20 @@ public class BlogPostService {
     }
   }
 
+  public String getBlogPost(int id) {
+    try (HttpClient client = HttpClient.newHttpClient()) {
+      HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(BASE_URL + "/posts/" + id))
+        .build();
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      System.out.println("Status code: " + response.statusCode());
+      System.out.println("Headers: " + response.headers());
+      return response.body();
+    }
+    catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   record Post(int userId, int id, String title, String body) {}
 }
