@@ -1,6 +1,7 @@
 package org.example.com.nfjs;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +29,11 @@ class BlogPostServiceTest {
     BlogPostService.Post newPost = fixture.addBlogPost(post);
     System.out.println(newPost);
     assertEquals(post.userId(), newPost.userId());
+  }
+
+  @Test
+  void SetOfStrings() {
+    assertThrows(Exception.class, () -> Set.of("this", "is", "a", "list", "of", "strings", "this"));
+    assertThrowsExactly(IllegalArgumentException.class, () -> Set.of("this", "is", "a", "list", "of", "strings", "this"));
   }
 }
