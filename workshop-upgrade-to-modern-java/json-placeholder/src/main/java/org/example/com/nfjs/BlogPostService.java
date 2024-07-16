@@ -40,5 +40,15 @@ public class BlogPostService {
     }
   }
 
-  public record Post(int userId, int id, String title, String body) {}
+  public record Post(
+    int userId,
+    int id,
+    String title,
+    String body
+  ) {
+    // see, you can add a constructor here, this one is weird. and now id is no longer modifiable. but yeah.
+    public Post(int userId, String title, String body) {
+      this(userId, 0, title, body);
+    }
+  }
 }
