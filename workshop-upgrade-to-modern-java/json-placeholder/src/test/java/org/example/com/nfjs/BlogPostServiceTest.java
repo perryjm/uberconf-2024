@@ -1,11 +1,15 @@
 package org.example.com.nfjs;
 
+import java.time.Month;
+import java.time.Year;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,4 +66,29 @@ class BlogPostServiceTest {
     System.out.println(blogPost);
     assertEquals(1, blogPost.userId());
   }
+
+  @Test
+  void modByThree() {
+    for (int i= 0; i < 10; i++) {
+      String result = switch (i % 3) {
+        case 0 -> "%d mod 3 == 0".formatted(i);
+        case 1 -> "%d mod 3 == 1".formatted(i);
+        case 2 -> "%d mod 3 == 2".formatted(i);
+        default -> "should never happen";
+      };
+      System.out.println(result);
+    }
+  }
+
+  @ParameterizedTest(name = "Test {index}: {0} has {1} days")
+  @EnumSource(Month.class)
+  void testMonths(Month month) {
+    int days = switch (month) {
+      case FEBRUARY -> Year.isLeap(Year.now().getValue()) ? 29 : 28;
+      case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
+      default -> 31;
+    };
+    System.out.println(month + " has " + days + " days");
+  }
+
 }
