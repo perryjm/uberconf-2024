@@ -6,8 +6,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import com.google.gson.Gson;
+
 public class BlogPostService {
   public static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
+  private final Gson gson = new Gson();
 
   public String getBlogPosts() {
     try (HttpClient client = HttpClient.newHttpClient()) {
@@ -24,20 +27,18 @@ public class BlogPostService {
     }
   }
 
-  public String getBlogPost(int id) {
+  public Post getBlogPost(int id) {
     try (HttpClient client = HttpClient.newHttpClient()) {
       HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create(BASE_URL + "/posts/" + id))
         .build();
       HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println("Status code: " + response.statusCode());
-      System.out.println("Headers: " + response.headers());
-      return response.body();
+      return gson.fromJson(response.body(), Post.class);
     }
     catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
 
-  record Post(int userId, int id, String title, String body) {}
+  public record Post(int userId, int id, String title, String body) {}
 }
