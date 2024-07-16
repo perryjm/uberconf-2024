@@ -39,6 +39,18 @@ public class BlogPostService {
     }
   }
 
+  public Post getBlogPostAsync(int id) {
+    try (var client = HttpClient.newHttpClient()) {
+      HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create("%s/posts/%d".formatted(BASE_URL, id)))
+        .build();
+      return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        .thenApply(HttpResponse::body)
+        .thenApply(body -> gson.fromJson(body, Post.class))
+        .join();
+    }
+  }
+
   public Post addBlogPost(Post post) {
     try (var client = HttpClient.newHttpClient()) {
       HttpRequest request = HttpRequest.newBuilder()

@@ -55,4 +55,11 @@ class BlogPostServiceTest {
 //    assertThat(map.size()).isEqualTo(3);
 
   }
+
+  @Test
+  void testGetBlogPostAsync() {
+    BlogPostService.Post blogPost = fixture.getBlogPostAsync(1);
+    System.out.println(blogPost);
+    assertEquals(1, blogPost.userId());
+  }
 }
