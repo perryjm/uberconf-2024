@@ -1,7 +1,9 @@
 package org.example.com.nfjs;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +37,22 @@ class BlogPostServiceTest {
   void SetOfStrings() {
     assertThrows(Exception.class, () -> Set.of("this", "is", "a", "list", "of", "strings", "this"));
     assertThrowsExactly(IllegalArgumentException.class, () -> Set.of("this", "is", "a", "list", "of", "strings", "this"));
+
+    Stream.of(1, 2, 3, 4, 5, 6)
+      .filter(i -> i % 2 == 0) // print evens
+      .forEach(it -> {
+        System.out.println(it);
+      });
+//      .toSet();
+  }
+
+  @Test
+  void mapOfStringsToIntegers() {
+    var map = Map.ofEntries(
+      Map.entry("one", 1),
+      Map.entry("two", 2),
+      Map.entry("three", 3));
+//    assertThat(map.size()).isEqualTo(3);
+
   }
 }
