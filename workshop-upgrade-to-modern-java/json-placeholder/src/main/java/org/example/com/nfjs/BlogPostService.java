@@ -30,7 +30,7 @@ public class BlogPostService {
   public Post getBlogPost(int id) {
     try (HttpClient client = HttpClient.newHttpClient()) {
       HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(BASE_URL + "/posts/" + id))
+        .uri(URI.create("%s/posts/%d".formatted(BASE_URL, id)))
         .build();
       HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
       return gson.fromJson(response.body(), Post.class);
