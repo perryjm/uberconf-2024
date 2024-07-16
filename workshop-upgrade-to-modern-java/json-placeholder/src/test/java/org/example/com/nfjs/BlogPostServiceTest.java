@@ -94,4 +94,26 @@ class BlogPostServiceTest {
     System.out.println(month + " has " + days + " days");
   }
 
+  @Test
+  void textBlock() {
+    String json = """
+      {
+        "userId": 1,
+        "id": 1,
+        "title": "title",
+        "body": "body"
+      }
+      """;
+    System.out.println(fixture.addBlogPost(json));
+    String anotherJson = """
+      {
+        "userId": %d,
+        "id": %d,
+        "title": %s,
+        "body": %s
+      }
+      """.formatted(1, 0, "title", "body"); // for text blocks, the closing """ shows how much white space indentatino to include in your text block.
+    System.out.println(fixture.addBlogPost(anotherJson));
+  }
+
 }

@@ -67,6 +67,10 @@ public class BlogPostService {
     }
   }
 
+  public Post addBlogPost(String post) {
+    return addBlogPost(gson.fromJson(post, Post.class));
+  };
+
   public record Post(
     int userId,
     int id,
