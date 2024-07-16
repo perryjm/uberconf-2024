@@ -21,4 +21,12 @@ class BlogPostServiceTest {
     System.out.println(blogPost);
     assertEquals(1, blogPost.userId());
   }
+
+  @Test
+  void addBlogPost() {
+    BlogPostService.Post post = new BlogPostService.Post(1, 0, "title", "body");
+    BlogPostService.Post newPost = fixture.addBlogPost(post);
+    System.out.println(newPost);
+    assertEquals(post.userId(), newPost.userId());
+  }
 }

@@ -39,6 +39,22 @@ public class BlogPostService {
     }
   }
 
+  public Post addBlogPost(Post post) {
+    try (HttpClient client = HttpClient.newHttpClient()) {
+      HttpRequest request = HttpRequest.newBuilder()
+        .header("Content-Type", "application/json")
+        .header("Accept", "application/json")
+        .uri(URI.create("%s/posts".formatted(BASE_URL)))
+        .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(post)))
+        .build();
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      return gson.fromJson(response.body(), Post.class);
+    }
+    catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public record Post(
     int userId,
     int id,
