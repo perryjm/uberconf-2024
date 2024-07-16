@@ -15,6 +15,8 @@ public class BlogPostService {
           .uri(URI.create(BASE_URL + "/posts"))
           .build();
       HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      System.out.println("Status code: " + response.statusCode());
+      System.out.println("Headers: " + response.headers());
       return response.body();
     }
     catch (IOException | InterruptedException e) {
