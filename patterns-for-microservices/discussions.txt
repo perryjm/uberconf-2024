@@ -1,0 +1,80 @@
+Create ADRs - Architecture Decision Records
+
+Make sure to reevaluate the decisions and update them, each
+quarter or more frequently if a need arises.
+
+Make sure the communication between microservices are 
+coarse grained and not fine grained.
+
+Microservices should have high availability and fine grained
+communication lowers that.
+
+You can have scalability or your can have performance, but
+very rarely you can have both at a reasonable cost.
+
+Microservices are really good at providing scalability.
+
+You trade-off for scalability and take in more of the latency.
+
+Failure is normal. Do not treat it as an exceptional situation.
+
+Think about resilience and also graceful failures.
+
+Higher operational cost.
+
+Microservices deal with bounded context
+
+The same information will reside on different microservices
+but in different formats and also to various level of detail.
+
+Shared data
+Hidden data
+
+   ms1                 ms2
+ email               email             Shared data (internal formats nvary)
+ FirstName           FirstName
+ LastName            LastName
+
+ incident date       Payment method    Hidden data
+
+Internal formats may be different, but the exchange format
+is standardize (versioning)
+
+Network failures are normal and may be regular.
+
+If we make multiple network calls, we 
+  increase latency
+  increase the chances of failures
+
+Group calls to make fewer calls that return richer data
+
+custom -> vehicles -> services - do not make this multiple calls
+
+Good circuit breakers help you will throughput
+  If a service failed, it prevents lengthy delays to ping the
+  broken service. It fails fast locally until it knows the service
+  is back and recovered. Other calls that do not use the service
+  can use your resources to function.
+
+
+When it comes to performance the question is not about speed,
+it is about "is it adequate."
+
+When you worry about performance, you are left with the 
+worry and not the performance.
+
+
+Business process:
+  
+
+
+
+
+
+
+
+
+
+
+
+

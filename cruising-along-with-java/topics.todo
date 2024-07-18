@@ -1,0 +1,136 @@
+Cruising Along with Java: Part 1 and 2
+Venkat Subramaniam
+Email: venkats@agiledeveloper.com
+Twitter: @venkat_s
+http://www.agiledeveloper.com download link
+  
+Topics:
+
+The Evolution of Java:
+✔Java 8 was a big change
+✔Java 9 added modules
+✔Then the six months release cycle started
+
+Type Inference:
+✔Typing: Static, dynamic, strong, weak
+✔Statically typed is not a point but a spectrum
+✔Statically typed Languages that heavily favor type inference
+ ✔Haskell, Scala, Kotlin
+✔Languages that are moving towards type inference
+ ✔C#, C++, Java
+✔Java has steadily introduced type inference starting in Java 5
+✔Java 5
+ ✔ generics
+✔Java 7
+ ✔diamond operator
+ ✔limitation
+✔Java 8
+ ✔lambdas type inference
+ ✔a few limitations
+  ✔no annotation
+  ✔not enough context
+✔Java 9
+  ✔support for anonymous class
+✔Java 10
+ ✔ local variable type inference
+ ✔ only where the type is 100% clear to the compiler
+ ✔ local variable
+ ✔ for
+ ✔ try
+ ✔ not for fields
+ ✔ not for parameters
+ ✔ caveats
+  ✔ Don't use with diamond
+  ✔ not so fast: Collection<Integer> to var eh?
+  ✔ base vs. derived
+  ✔ can't use to store lambdas
+    ✔seriously, don't
+  ✔ benefits
+   ✔ reduced clutter
+   ✔ easy to evolve
+   ✔ easier to reuse
+   ✔ life saver during debugging
+   ✔ targeted intersection types
+   ✔ anonymous non-denotable types
+  ✔ var is not a keyword
+✔Java 11
+   ✔ var of lambda parameters
+     ✔limitations
+       ✔ can't mix var and types for different parameters
+       ✔ can't mix var and implicit type for different parameters
+   ✔ is this really useful? - Yes
+     ✔ for annotation with type inference
+✔ Recommendations
+ ✔ don't use with <>
+ ✔ don't put type in name
+ ✔ make sure the type is what you wanted it to be
+ ✔ specify type unless it is dead obvious
+ ✔ use var for temp, debugging
+ ✔ use for reuse
+ ✔ use var to annotate lambda parameters while using type inference
+
+Switch Expressions:
+✔The Java of the Past
+✔switch expression
+✔automatic breaks
+✔multiple match
+✔multiline cases
+
+Text Blocks:
+✔The Java of the Past
+✔Creating a multiline string
+✔No need to escape
+✔Smart indentations
+✔trailing space handling
+✔New escapes
+ \
+ \s
+✔formatting
+ ✔replace
+ ✔formatted
+
+Records:
+✔The Java of the Past
+✔data classes
+✔immutability
+✔getting the properties
+✔toString
+✔no extends (Record is the implicit base)
+✔implicitly final
+✔interfaces
+✔adding methods
+✔Local Records
+✔Adding a canonical constructor
+✔Using a compact constructor 
+✔which one to use
+✔the behavior of the compact constructor
+✔Adding another constructor
+
+Sealed Classes and Interfaces:
+✔The Java of the Past
+✔Abstract base classes
+✔final classes
+✔Algebraic Data Types
+✔Creating Sealed Classes
+✔permits
+
+Pattern Matching:
+✔benefits
+✔pattern matching with instanceof
+✔from if to a switch
+✔Type matching
+✔null matching
+✔matching with null and type
+✔dominance
+✔guarded pattern
+✔guarded pattern and dominance
+-completeness
+ -with sealed classes
+ -what if the classes change?
+-destructuring
+
+Summary:
+
+Reference:
+https://pragprog.com/titles/vscajava/cruising-along-with-java
+

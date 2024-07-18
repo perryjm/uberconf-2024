@@ -1,0 +1,156 @@
+Patterns for Microservices
+Venkat Subramaniam
+Email: venkats@agiledeveloper.com
+Twitter: @venkat_s
+http://www.agiledeveloper.com download link
+  
+Topics:
+- Microservices Architecture
+- Distributed Architecture
+
+- Challenges
+  - Network calls
+  - Latency
+  - Higher chances of failures
+  - Higher Cost
+  - Need more observing and monitoring
+
+- Creating Microservices
+
+- Network Communication
+  - Synchronous vs. Asynchronous
+  - Text based vs. binary exchange of data
+  - fetching multiple pieces of data
+    - Reactive Streams, Backpressure
+    - Kafka, flink
+    - GraphQL
+
+- APIs
+-good practices for versioning
+  -semantic versioning
+   -major.minor.patch
+     ^      ^     ^
+     |      |     |
+     |      |      ------ bug fixes, backward compatible
+     |       ------------ added functionality, backward compatible
+      ------------------- incompatible API changes
+      -pre-release versions may be added as extension with a dash
+  -Entity versioning
+  -change to data model
+  -change to format and not data model
+
+- Dealing with Network Failures
+ - Graceful
+ - Keep communications coarse grained
+ - Implement circuit breakers
+
+- Communication Topologies
+  - Broker
+    - no central mediator
+    - distributed across by chain of communication
+    - extensible and dynamic
+    - scalable
+    - responsive
+    - controlling workflow takes more effort
+    - error handling is hard
+    - hard to recover from failures
+    - hard to restart
+  - Mediator
+   - mediator knows the steps and coordination
+   - multiple mediators for different groups of workflow / events
+   - better control over the workflow
+   - simpler
+   - relatively easy error handling
+   - easy to recover, restart, etc.
+   - low scalability
+   - modeling complex workflow gets harder
+
+- synchronous vs. asynchronous communication
+  - synchronous is simpler
+  - easier error handling
+  - easier to understand
+  - less availability
+  - asynchronous is much more complex
+  - error handling is harder
+  - better throughput and availability
+
+- Data querying
+ - data often spread across different microservices
+ - queries can involve higher latency
+ - nature of the query often different from the storage of data
+ - CQRS
+ - Command and Query separation
+ - Query services, analytics
+ - better performance
+ - more complex
+ - eventual consistency
+ - replication lags
+
+
+- Transactions
+  - distributed transactions === bad idea
+  - business transactions vs. technical transactions
+  - sagas
+    - retriable transactions
+    - compensating transactions
+
+    - choreography based implementation
+    - orchestration based implementation
+
+- deploying Microservices
+    Never recycle a microservices that is running
+
+    Patch or Minor update
+      ms1  ----> |
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> |
+
+    We have a patch or a minor update
+
+      ms1  ----> |
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2'
+                   --> ms2'
+                   --> ms2'
+
+    Do the new instances work well?
+     No: Kill them
+     Yes: Kill the previous instances
+
+    Major update
+
+      ms1  ----> |
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> |
+
+    Major updates are no backward compatible
+
+      ms1  ----> |
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> | --> ms2
+      ms1  ----> |
+
+                 |
+                 |
+                 |
+                 | ---> ms2"
+                 | ---> ms2"
+                 | ---> ms2"
+                 |
+                 |
+
+   Wait for existing microservices to start using your newer
+   versions. Their ms1" will use your ms2"
+
+   Keep monitoring ms2 to see the usage and requests going down.
+   When they are close to zero, kill them.
+
+- discussions
+
